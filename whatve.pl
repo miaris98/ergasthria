@@ -14,7 +14,23 @@ replace(O, R, [H|T], [H|T2]) :- H \= O, replace(O, R, T, T2).
 
 
 range(Low, Low, _).
-range(O,Low,High) :- NewLow is Low+1, NewLow =< High, range(O, NewLow, High).
-
-range2(Low,Low,_).
-range2([H|T],Low,High) :- NewLow is Low+1, NewLow =< High,H=Low,range(T, NewLow, High).
+range(O,Low,High) :- NewLow is Low+1, NewLow =< High, range(O, NewLow, High). 
+ 
+ 
+ numlist(L, U, Ns) :-
+     must_be(integer, L),
+      must_be(integer, U),
+      L =< U,
+    numlist_(L, U, Ns).
+  
+  
+  
+  numlist_(U, U, List) :-
+    !,
+      List = [U].
+	  
+	  
+  numlist_(L, U, [L|Ns]) :-
+     L2 is L+1,
+      numlist_(L2, U, Ns).
+  
